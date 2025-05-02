@@ -1,17 +1,22 @@
 [
     {
-        "Levels": "Level 1",
-        "pb": "3:45",
+        "title": "Level 1",
+        "pb": "3",
         "live": ""
     },
     {
-        "Levels": "Level 2",
-        "pb": "1:32",
+        "title": "Level 2",
+        "pb": "59",
         "live": ""
     },
     {
-        "Level2": "Level 3",
-        "pb": "2:15",
+        "title": "Level 3",
+        "pb": "99",
+        "live": ""
+    },
+	{
+        "title": "Level 4",
+        "pb": "82",
         "live": ""
     }
 ]
