@@ -1,22 +1,5 @@
 [
-    {
-        "title": "Level 1",
-        "pb": "3",
-        "live": ""
-    },
-    {
-        "title": "Level 2",
-        "pb": "59",
-        "live": ""
-    },
-    {
-        "title": "Level 3",
-        "pb": "99",
-        "live": ""
-    },
-	{
-        "title": "Level 4",
-        "pb": "82",
-        "live": ""
-    }
+	"titles": ["Level 1, Level 2, Level 3, Level 4"],
+	"worldRecord": [3, 59, 99, 82],
+	"defaultPB": [999, 999, 999, 999]
 ]

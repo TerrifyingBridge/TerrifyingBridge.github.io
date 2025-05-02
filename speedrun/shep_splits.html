@@ -93,7 +93,7 @@
 
     <button class="nav-button" onclick="toggleMenu('africaMenu')">Africa Splits</button>
     <div class="submenu" id="africaMenu">
-		<button class="nav-button" onclick="loadSplits('https:/terrifyingbridge.github.io/speedrun/splits/africa_captials.json')">Capitals</button>
+		<button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/africa_capitals.json')">Capitals</button>
 		<button class="nav-button">Countries</button>
 		<button class="nav-button">Landscapes</button>
 		<button class="nav-button">100%</button>
@@ -123,7 +123,7 @@
     </div>
 
     <div class="program-area">
-      Your tool or embedded program will go here.
+      Select the splits to start
     </div>
   </div>
 
@@ -134,47 +134,152 @@
     }
   </script>
 	
-	<script>
+<script>
+  let comparisonData = {};
+  let userPBs = [];
+  let liveTimes = [];
+  let activeComparison = "personalBest";
+
   async function loadSplits(filename) {
     try {
       const res = await fetch(filename);
-      const splits = await res.json();
+      const data = await res.json();
 
-      let html = `
-        <h3>Live Split Tracker</h3>
-        <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-          <thead>
-            <tr style="background-color: #f0f0f0;">
-              <th>Level Name</th>
-              <th>Personal Best</th>
-              <th>Live</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${splits.map((split, index) => `
-              <tr>
-                <td>${split.title}</td>
-                <td>${split.pb}</td>
-                <td>
-                  <input 
-                    type="text" 
-                    placeholder="Enter time..." 
-                    value="${split.live}" 
-                    oninput="window.loadedSplits[${index}].live = this.value"
-                  />
-                </td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `;
+      comparisonData = data;
+      liveTimes = Array(data.titles.length).fill("");
+      userPBs = data.defaultPB || Array(data.titles.length).fill("");
 
-      window.loadedSplits = splits; // store globally if needed
-      document.querySelector('.program-area').innerHTML = html;
+      renderSplitUI();
     } catch (err) {
       console.error("Failed to load split data:", err);
       document.querySelector('.program-area').innerHTML = "<p>Error loading split data.</p>";
     }
+  }
+
+  function formatTime(seconds) {
+    if (isNaN(seconds)) return "";
+    const total = Math.round(seconds);
+    const min = Math.floor(total / 60);
+    const sec = total % 60;
+    return `${min}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  function renderSplitUI() {
+    const titles = comparisonData.titles;
+    const comparisonSet = activeComparison === "personalBest" ? userPBs : comparisonData.worldRecord;
+
+    let dropdown = `
+      <label for="comparison-select"><strong>Comparison:</strong></label>
+      <select id="comparison-select" onchange="changeComparison(this.value)">
+        <option value="personalBest" ${activeComparison === "personalBest" ? "selected" : ""}>Personal Best</option>
+        <option value="worldRecord" ${activeComparison === "worldRecord" ? "selected" : ""}>World Record</option>
+      </select>
+      <br><br>
+    `;
+
+    let rows = titles.map((title, i) => {
+      const comp = comparisonSet[i];
+      const live = Number(liveTimes[i]);
+      const delta = !isNaN(live) ? (live - comp) : "";
+
+      return `
+        <tr>
+          <td>${title}</td>
+
+          <td>
+            ${activeComparison === "personalBest" ? `
+              <input 
+                type="number"
+                min="0"
+                step="1"
+                value="${userPBs[i] || ""}" 
+                data-index="${i}"
+                oninput="updatePB(event)"
+                style="width: 80px; text-align: center;"
+              />` : formatTime(comp)}
+          </td>
+
+          <td>
+            <input 
+              type="number"
+              min="0"
+              step="1"
+              value="${liveTimes[i] || ""}" 
+              data-index="${i}"
+              oninput="updateLive(event)"
+              style="width: 80px; text-align: center;"
+            />
+          </td>
+
+          <td>${!isNaN(delta) ? (delta >= 0 ? "+" : "") + formatTime(Math.abs(delta)) : ""}</td>
+        </tr>
+      `;
+    }).join('');
+
+    const totals = getTotals();
+
+    const html = `
+      <h3>Live Split Tracker</h3>
+      ${dropdown}
+      <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="background-color: #f0f0f0;">
+            <th>Title</th>
+            <th>${activeComparison === "personalBest" ? "Personal Best" : "World Record"}</th>
+            <th>Live</th>
+            <th>Δ</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+
+      <div style="margin-top: 1rem; font-weight: bold; text-align: center;">
+        ${totals.count > 0
+          ? `Live Total: ${formatTime(totals.liveTotal)}<br>
+             Comparison Total: ${formatTime(totals.comparisonTotal)}<br>
+             Overall Δ: ${(totals.liveTotal - totals.comparisonTotal >= 0 ? "+" : "") + formatTime(Math.abs(totals.liveTotal - totals.comparisonTotal))}`
+          : `Enter times above to see totals.`}
+      </div>
+    `;
+
+    document.querySelector('.program-area').innerHTML = html;
+  }
+
+  function updateLive(e) {
+    const index = e.target.dataset.index;
+    liveTimes[index] = e.target.value;
+    renderSplitUI();
+  }
+
+  function updatePB(e) {
+    const index = e.target.dataset.index;
+    userPBs[index] = e.target.value;
+    renderSplitUI();
+  }
+
+  function changeComparison(newValue) {
+    activeComparison = newValue;
+    renderSplitUI();
+  }
+
+  function getTotals() {
+    const comparisonSet = activeComparison === "personalBest" ? userPBs : comparisonData.worldRecord;
+    let liveTotal = 0;
+    let comparisonTotal = 0;
+    let count = 0;
+
+    for (let i = 0; i < liveTimes.length; i++) {
+      const live = Number(liveTimes[i]);
+      const comp = Number(comparisonSet[i]);
+
+      if (!isNaN(live) && !isNaN(comp)) {
+        count++;
+        liveTotal += live;
+        comparisonTotal += comp;
+      }
+    }
+
+    return { count, liveTotal, comparisonTotal };
   }
 </script>
 
