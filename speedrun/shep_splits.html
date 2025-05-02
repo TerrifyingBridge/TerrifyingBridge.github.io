@@ -6,13 +6,16 @@
   <title>Sheppard Software Geography - Splits</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      height: 100vh;
-    }
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  min-height: 100vh;
+  align-items: stretch;
+}
 
     .sidebar {
+  display: flex;
+  flex-direction: column;
       width: 30%;
       background-color: #f0f0f0;
       padding: 1rem;
@@ -75,7 +78,7 @@
       padding: 1rem;
       border: 2px dashed #aaa;
       border-radius: 8px;
-      min-height: 300px;
+      display: inline-block;
       text-align: center;
       color: #555;
     }
@@ -187,7 +190,7 @@
         </table>
         <div id="summary-line" style="margin-top: 1rem; font-weight: bold; text-align: center;">
           ${totals.count > 0
-            ? `Live Total: ${formatTime(totals.liveTotal)} &nbsp;|&nbsp; Comparison Total: ${formatTime(totals.comparisonTotal)} &nbsp;|&nbsp; Overall Δ: ${(totals.liveTotal - totals.comparisonTotal >= 0 ? "+" : "") + formatTime(Math.abs(totals.liveTotal - totals.comparisonTotal))}`
+            ? `Live Total: ${formatTime(totals.liveTotal)} &nbsp;|&nbsp; Comparison Total: ${formatTime(totals.comparisonTotal)} &nbsp;|&nbsp; Overall Δ: ${(totals.liveTotal - totals.comparisonTotal >= 0 ? "+" : "-") + formatTime(Math.abs(totals.liveTotal - totals.comparisonTotal))}`
             : `Enter times above to see totals.`}
         </div>
       `;
@@ -246,8 +249,10 @@
       const totals = getTotals();
       const summaryDiv = document.getElementById("summary-line");
       if (summaryDiv) {
+        const delta = totals.liveTotal - totals.comparisonTotal;
+        const color = delta < 0 ? 'darkgreen' : 'darkred';
         summaryDiv.innerHTML = totals.count > 0
-          ? `Live Total: ${formatTime(totals.liveTotal)} &nbsp;|&nbsp; Comparison Total: ${formatTime(totals.comparisonTotal)} &nbsp;|&nbsp; Overall Δ: ${(totals.liveTotal - totals.comparisonTotal >= 0 ? "+" : "-") + formatTime(Math.abs(totals.liveTotal - totals.comparisonTotal))}`
+          ? `Live Total: ${formatTime(totals.liveTotal)} &nbsp;|&nbsp; Comparison Total: ${formatTime(totals.comparisonTotal)} &nbsp;|&nbsp; <span style="color: ${color};">Overall Δ: ${(delta < 0 ? "-" : "+") + formatTime(Math.abs(delta))}</span>`
           : `Enter times above to see totals.`;
       }
     }
