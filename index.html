@@ -1,35 +1,101 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Welcome to My GitHub Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Christina Greenfield</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #eef2f3, #8e9eab);
+      color: #333;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .buttons a {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid #333;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .buttons a:hover {
+      background-color: #333;
+      color: #fff;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #333;
+      padding-bottom: 0.5rem;
+    }
+
+    section p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      background-color: #f5f5f5;
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, I'm Christina!</h1>
-  <p>Welcome to my personal website.</p>
-  <nav>
-    <a href="#projects">Projects</a> |
-    <a href="#about">About Me</a> |
-    <a href="#contact">Contact</a>
-  </nav>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul>
-      <li><a href="https://github.com/yourusername/project1">Project 1</a></li>
-      <li><a href="https://github.com/yourusername/project2">Project 2</a></li>
-    </ul>
-  </section>
+  <!-- Title Section -->
+  <header>
+    <h1>Christina Greenfield</h1>
+    <p>Welcome to my personal website! <br> click the links below to navigate to the various projects I've worked on!</p>
+    <div class="buttons">
+		<a href="#blog">Blog</a>
+		<a href="#projects">Personal Projects</a>
+		<a href="speedrun/speedrun.html">Speedrunning Tools</a>
+    </div>
+  </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I’m a computer science educator and developer. I love building cool stuff and teaching others how to do it too!</p>
-  </section>
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Christina Greenfield · <a href="mailto:you@example.com">Contact (under construction)</a> · <a href="https://github.com/yourusername">GitHub (under construction)</a>
+  </footer>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Reach me on <a href="https://github.com/yourusername">GitHub</a>.</p>
-  </section>
 </body>
 </html>
