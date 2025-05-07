@@ -165,30 +165,6 @@
     <div class="submenu" id="worldMenu">
 		<button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/projects/splits/world.json')">100%</button>
     </div>
-      <button class="nav-button" onclick="toggleMenu('universalMenu')">Universal Level Splits</button>
-    <div class="submenu" id="universalMenu">
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_level1r.json')">All Quizzes Level 1 Regional</button>
-		<button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_level1n.json')">All Quizzes Level 1 National</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_level2.json')">All Quizzes Level 2</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_level3.json')">All Quizzes Level 3</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_level4.json')">All Quizzes Level 4</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_level5.json')">All Quizzes Level 5</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_level6.json')">All Quizzes Level 6</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_level7.json')">All Quizzes Level 7</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_level8.json')">All Quizzes Level 8</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_level9.json')">All Quizzes Level 9</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_cap1.json')">All Capital Quizzes Level 1</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_cap2.json')">All Capital Quizzes Level 2</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_cap3.json')">All Capital Quizzes Level 3</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universal_cap4.json')">All Capital Quizzes Level 4</button>
-    </div>
-      <button class="nav-button" onclick="toggleMenu('universeMenu')">Universe Geography Splits</button>
-    <div class="submenu" id="universeMenu">
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universe_capitals.json')">Universe Capitals</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universe_countries.json')">Universe Countries</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universe_landscapes.json')">Universe Landscapes</button>
-        <button class="nav-button" onclick="loadSplits('https://terrifyingbridge.github.io/speedrun/splits/universe_100.json')">Universe 100%</button>
-    </div>
   </div>
 
   <div class="main-content">
@@ -255,8 +231,8 @@
         return `
           <tr>
             <td>${title}</td>
-            <td>${activeComparison === "personalBest" ? `<input type="number" min="0" step="1" value="${userPBs[i] || ""}" data-index="${i}" oninput="updatePB(event)" style="width: 80px; text-align: center;" />` : formatTime(comp)}</td>
-            <td><input type="number" min="0" step="1" value="${liveTimes[i] || ""}" data-index="${i}" oninput="updateLive(event)" style="width: 80px; text-align: center;" /></td>
+            <td>${activeComparison === "personalBest" ? `<input type="text" min="0" step="1" value="${userPBs[i] || ""}" data-index="${i}" onchange="updatePB(event)" style="width: 80px; text-align: center;" />` : formatTime(comp)}</td>
+            <td><input type="text" min="0" step="1" value="${liveTimes[i] || ""}" data-index="${i}" onchange="updateLive(event)" style="width: 80px; text-align: center;" /></td>
             <td id="delta-${i}" style="color: ${delta < 0 ? 'darkgreen' : 'darkred'};">
   ${!isNaN(delta) ? (delta < 0 ? "-" : "+") + formatTime(Math.abs(delta)) : ""}
 </td>
@@ -287,13 +263,20 @@
         </div>
       `;
 
-      document.querySelector('.program-area').innerHTML = html;
+      document.querySelector('.program-area').innerHTML = `<h2 style="margin-bottom: 1rem;">Selected Splits: ${comparisonData.name || 'Unnamed'}</h2>` + html;
     }
 
     function updateLive(e) {
       const index = e.target.dataset.index;
-      const value = Number(e.target.value);
+      let rawInput = e.target.value;
+      let value;
+      try {
+        value = Function(`return (${rawInput})`)();
+      } catch {
+        value = NaN;
+      }
       liveTimes[index] = value;
+      e.target.value = value;
       const comp = activeComparison === "personalBest" ? Number(userPBs[index]) : Number(comparisonData.worldRecord[index]);
       const deltaCell = document.getElementById(`delta-${index}`);
       const delta = !isNaN(value) && !isNaN(comp) ? (value - comp) : null;
@@ -304,8 +287,15 @@
 
     function updatePB(e) {
       const index = e.target.dataset.index;
-      const value = Number(e.target.value);
+      let rawInput = e.target.value;
+      let value;
+      try {
+        value = Function(`return (${rawInput})`)();
+      } catch {
+        value = NaN;
+      }
       userPBs[index] = value;
+      e.target.value = value;
       if (activeComparison === "personalBest") {
         const live = Number(liveTimes[index]);
         const delta = !isNaN(live) && !isNaN(value) ? (live - value) : null;
