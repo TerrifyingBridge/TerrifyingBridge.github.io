@@ -1,4 +1,5 @@
 {
+	"name": "Asia 100%",
 	"titles": ["Capital Level 1", "Capital Level 2", "Capital Level 3", "Capital Level 4", "Level 1 Regional", "Level 1 National", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9", "Bodies of Water", "Landscapes", "Rivers"],
 	"worldRecord": [23, 33, 45, 45, 26, 33, 39, 41, 35, 35, 39, 35, 45, 82, 15, 17, 13],
 	"defaultPB": [999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999]

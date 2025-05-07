@@ -1,4 +1,5 @@
 {
+	"name": "Canada Capitals",
 	"titles": ["Level 1", "Level 2", "Level 3"],
 	"worldRecord": [9, 11, 13],
 	"defaultPB": [999, 999, 999]

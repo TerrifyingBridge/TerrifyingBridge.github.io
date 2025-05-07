@@ -1,4 +1,5 @@
 {
+	"name": "United States States",
 	"titles": ["Level 1 Regional", "Level 1 National", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9"],
 	"worldRecord": [31, 45, 78, 72, 48, 64, 71, 70, 84, 105],
 	"defaultPB": [999, 999, 999, 999, 999, 999, 999, 999, 999, 999]

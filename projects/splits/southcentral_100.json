@@ -1,4 +1,5 @@
 {
+	"name": "South and Central America 100%",
 	"titles": ["Capital Level 1", "Capital Level 2", "Capital Level 3", "Capital Level 4", "Level 1 Regional", "Level 1 National", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9", "Bodies of Water", "Landscapes", "Rivers"],
 	"worldRecord": [14, 18, 27, 28, 4, 20, 30, 28, 19, 26, 29, 30, 38, 44, 5, 3, 12],
 	"defaultPB": [999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999]

@@ -1,4 +1,5 @@
 {
+	"name": "Caribbean Capitals",
 	"titles": ["Level 1", "Level 2", "Level 3", "Level 4"],
 	"worldRecord": [18, 22, 29, 35],
 	"defaultPB": [999, 999, 999, 999]

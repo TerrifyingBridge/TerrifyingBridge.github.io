@@ -1,4 +1,5 @@
 {
+	"name": "Asia Countries",
 	"titles": ["Level 1 Regional", "Level 1 National", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9"],
 	"worldRecord": [26, 30, 38, 41, 33, 42, 41, 45, 49, 60],
 	"defaultPB": [999, 999, 999, 999, 999, 999, 999, 999, 999, 999]

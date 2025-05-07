@@ -1,4 +1,5 @@
 {
+	"name": "Universe Capitals",
 	"titles": ["Africa Level 1", "Africa Level 2", "Africa Level 3", "Africa Level 4", "Asia Level 1", "Asia Level 2", "Asia Level 3", "Asia Level 4", "Canada Level 1", "Canada Level 2", "Canada Level 3", "Caribbean Level 1", "Caribbean Level 2", "Caribbean Level 3", "Caribbean Level 4", "Europe Level 1", "Europe Level 2", "Europe Level 3", "Europe Level 4", "Mexico Level 1", "Mexico Level 2", "Mexico Level 3", "Mexico Level 4", "Middle East Level 1", "Middle East Level 2", "Middle East Level 3", "Middle East Level 4", "Oceania Level 1", "Oceania Level 2", "Oceania Level 3", "Oceania Level 4", "SaCA Level 1", "SaCA Level 2", "SaCA Level 3", "SaCA Level 4", "USA Level 1", "USA Level 2", "USA Level 3", "USA Level 4"],
 	"worldRecord": [999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999],
 	"defaultPB": [999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999]

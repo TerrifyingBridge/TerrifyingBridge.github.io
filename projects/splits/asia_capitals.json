@@ -1,4 +1,5 @@
 {
+	"name": "Asia Capitals",
 	"titles": ["Level 1", "Level 2", "Level 3", "Level 4"],
 	"worldRecord": [24, 32, 43, 40],
 	"defaultPB": [999, 999, 999, 999]

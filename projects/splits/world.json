@@ -1,4 +1,5 @@
 {
+	"name": "World Geography",
 	"titles": ["Level 1 Regional", "Level 1 National", "Level 2", "Level 3"],
 	"worldRecord": [2, 8, 12, 10],
 	"defaultPB": [999, 999, 999, 999]

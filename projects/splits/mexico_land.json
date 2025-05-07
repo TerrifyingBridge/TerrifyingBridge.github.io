@@ -1,4 +1,5 @@
 {
+	"name": "Mexico Landscapes",
 	"titles": ["Lakes", "Landscapes", "Rivers"],
 	"worldRecord": [2, 3, 6],
 	"defaultPB": [999, 999, 999]

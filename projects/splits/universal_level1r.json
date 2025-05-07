@@ -1,4 +1,5 @@
 {
+	"name": "All Quizzes Level 1 Regional",
 	"titles": ["Africa Level 1R", "Asia Level 1R", "Canada Level 1R", "Caribbean Level 1R", "Europe Level 1R", "Mexico Level 1R", "Middle East Level 1R", "Oceania Level 1R", "SaCA Level 1R", "US Level 1R", "World Level 1R"],
 	"worldRecord": [36, 23, 6, 5, 32, 28, 12, 25, 4, 31, 3],
 	"defaultPB": [999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999]

@@ -1,4 +1,5 @@
 {
+	"name": "Middle East Capitals",
 	"titles": ["Level 1", "Level 2", "Level 3", "Level 4"],
 	"worldRecord": [10, 15, 21, 20],
 	"defaultPB": [999, 999, 999, 999]
