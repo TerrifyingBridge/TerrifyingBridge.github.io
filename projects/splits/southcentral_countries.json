@@ -1,6 +1,6 @@
 {
 	"name": "South and Central America Countries",
 	"titles": ["Level 1 Regional", "Level 1 National", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9"],
-	"worldRecord": [4, 20, 30, 28, 19, 26, 29, 30, 38, 44],
+	"worldRecord": [3, 17, 23, 24, 18, 23, 24, 23, 30, 32],
 	"defaultPB": [999, 999, 999, 999, 999, 999, 999, 999, 999, 999]
 }
