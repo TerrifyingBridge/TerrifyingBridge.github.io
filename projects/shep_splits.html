@@ -286,8 +286,11 @@
             : `Enter times above to see totals.`}
         </div>
       `;
-
-      document.querySelector('.program-area').innerHTML = `<h2 style="margin-bottom: 1rem;">Selected Splits: ${comparisonData.name || 'Unnamed'}</h2>` + html;
+      const clearButton = `<button onclick="clearLiveTimes()" style="margin-top: 1rem; padding: 0.5rem 1rem;">Clear Live Times</button>`;
+      document.querySelector('.program-area').innerHTML =
+  `<h2 style="margin-bottom: 1rem;">Selected Splits: ${comparisonData.name || 'Unnamed'}</h2>` +
+  html +
+  clearButton;
     }
 
     function updateLive(e) {
@@ -297,7 +300,7 @@
       try {
         value = Function(`return (${rawInput})`)();
       } catch {
-        value = NaN;
+        value = "";
       }
       liveTimes[index] = value;
       e.target.value = value;
@@ -316,7 +319,7 @@
       try {
         value = Function(`return (${rawInput})`)();
       } catch {
-        value = NaN;
+        value = "";
       }
       userPBs[index] = value;
       e.target.value = value;
@@ -362,6 +365,11 @@
           : `Enter times above to see totals.`;
       }
     }
+      function clearLiveTimes() {
+  liveTimes = Array(comparisonData.titles.length).fill("");
+  renderSplitUI();
+}
+
   </script>
 </body>
 </html>
