@@ -1,6 +1,6 @@
 {
 	"name": "Africa Countries",
 	"titles": ["Level 1 Regional", "Level 1 National", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9"],
-	"worldRecord": [40, 59, 81, 86, 62, 89, 79, 90, 129, 119],
+	"worldRecord": [50, 51, 62, 63, 55, 61, 60, 60, 67, 80],
 	"defaultPB": [999, 999, 999, 999, 999, 999, 999, 999, 999, 999]
 }
