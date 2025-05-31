@@ -1,6 +1,6 @@
 {
 	"name": "Mexico 100%",
 	"titles": ["Capital Level 1", "Capital Level 2", "Capital Level 3", "Capital Level 4", "Level 1 Regional", "Level 1 National", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9", "Lakes", "Landscapes", "Rivers"],
-	"worldRecord": [27, 39, 65, 57, 25, 31, 51, 52, 42, 46, 57, 61, 69, 78, 5, 5, 10],
+	"worldRecord": [23, 35, 47, 52, 18, 28, 36, 40, 31, 37, 39, 37, 48, 58, 4, 4, 7],
 	"defaultPB": [999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999]
 }

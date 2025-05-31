@@ -1,6 +1,6 @@
 {
 	"name": "Mexico Capitals",
 	"titles": ["Level 1", "Level 2", "Level 3", "Level 4"],
-	"worldRecord": [25, 35, 65, 58],
+	"worldRecord": [18, 30, 44, 46],
 	"defaultPB": [999, 999, 999, 999]
 }
