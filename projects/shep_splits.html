@@ -341,24 +341,33 @@
       const comparisonSet = activeComparison === "personalBest" ? userPBs : comparisonData.worldRecord;
       let liveTotal = 0;
       let comparisonTotal = 0;
+      let overallDelta = 0;
       let count = 0;
       for (let i = 0; i < liveTimes.length; i++) {
         const live = Number(liveTimes[i]);
         const comp = Number(comparisonSet[i]);
-        if (!isNaN(live) && !isNaN(comp)) {
+        if (live == "") {
+          count++;
+          comparisonTotal += comp;
+          liveTotal += live
+        }
+        else if (!isNaN(live) && !isNaN(comp)) {
           count++;
           liveTotal += live;
           comparisonTotal += comp;
+          overallDelta += live - comp;
         }
       }
-      return { count, liveTotal, comparisonTotal };
+      return { count, liveTotal, comparisonTotal, overallDelta };
     }
 
     function updateSummary() {
       const totals = getTotals();
+      console.log(totals);
+      
       const summaryDiv = document.getElementById("summary-line");
       if (summaryDiv) {
-        const delta = totals.liveTotal - totals.comparisonTotal;
+        const delta = totals.overallDelta;
         const color = delta < 0 ? 'darkgreen' : 'darkred';
         summaryDiv.innerHTML = totals.count > 0
           ? `Live Total: ${formatTime(totals.liveTotal)} &nbsp;|&nbsp; Comparison Total: ${formatTime(totals.comparisonTotal)} &nbsp;|&nbsp; <span style="color: ${color};">Overall Δ: ${(delta < 0 ? "-" : "+") + formatTime(Math.abs(delta))}</span>`
