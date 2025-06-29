@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Planetary Systems Project</title>
+
+  <!-- ✅ MathJax for LaTeX -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+  <!-- ✅ Marked.js for Markdown parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+    }
+
+    aside {
+      width: 250px;
+      background-color: #ffffff;
+      border-right: 1px solid #ddd;
+      padding: 1rem;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+      flex-shrink: 0;
+      min-height: 100vh;
+    }
+
+    aside h2 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .chapter-button {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.5rem;
+      padding: 0.6rem;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-align: left;
+      transition: background-color 0.3s ease;
+    }
+
+    .chapter-button:hover {
+      background-color: #005f99;
+    }
+
+    .section-list {
+      display: none;
+      padding-left: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-list button {
+      display: block;
+      width: 100%;
+      margin: 0.25rem 0;
+      padding: 0.4rem 0.75rem;
+      background-color: #e0f0fc;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      text-align: left;
+      color: #007acc;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .section-list button:hover {
+      background-color: #cbe8fb;
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 2rem;
+    }
+
+    header {
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .visualization-box,
+    .markdown-box {
+      min-height: 200px;
+      background-color: #eaeaea;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 3rem;
+    }
+
+    .markdown-box h1,
+    .markdown-box h2,
+    .markdown-box h3 {
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 0.3rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      aside {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        box-shadow: none;
+      }
+    }
+  </style>
+
+<script>
+  function toggleSectionList(id) {
+    const section = document.getElementById(id);
+    const isVisible = section.style.display === 'block';
+    document.querySelectorAll('.section-list').forEach(el => {
+      el.style.display = 'none';
+    });
+    if (!isVisible) section.style.display = 'block';
+  }
+
+function selectSection(sectionName, markdownUrl) {
+  // Update visualization placeholder
+  document.getElementById('visualization-content').innerText = `[Visualization for Section ${sectionName}]`;
+
+  fetch(markdownUrl)
+    .then(response => {
+      if (!response.ok) throw new Error('Failed to load markdown.');
+      return response.text();
+    })
+    .then(markdown => {
+      const html = marked.parse(markdown);
+      const container = document.getElementById('markdown-content');
+      container.innerHTML = html;
+
+      // ✅ Rebuild relative image paths
+      const basePath = markdownUrl.substring(0, markdownUrl.lastIndexOf('/'));
+      const imgs = container.querySelectorAll('img');
+      imgs.forEach(img => {
+        const src = img.getAttribute('src');
+        if (src && !src.startsWith('http') && !src.startsWith('data:')) {
+          const fullUrl = `${basePath}/${src}`
+            .replace('https://github.com/', 'https://raw.githubusercontent.com/')
+            .replace('/blob/', '/')
+            .replace('?raw=true', '');
+          img.setAttribute('src', fullUrl);
+        }
+      });
+
+      // ✅ Re-render MathJax
+      if (window.MathJax) {
+        MathJax.typesetPromise();
+      }
+    })
+    .catch(err => {
+      document.getElementById('markdown-content').innerText = 'Error loading content: ' + err.message;
+      console.error("Markdown fetch error:", err);
+    });
+}
+
+</script>
+
+</head>
+<body>
+
+<aside>
+  <h2>Chapters</h2>
+
+  <button class="chapter-button" onclick="toggleSectionList('chapter1')">Chapter 1 - The Two Body Problem</button>
+  <div class="section-list" id="chapter1">
+    <button onclick="selectSection('1.1', 'https://raw.githubusercontent.com/TerrifyingBridge/PlanetarySystemsProject/main/Chapter%201%20Two%20Body%20Problem/1.1%20Introduction/Description.md')">
+      Section 1.1 - Intorduction
+    </button>
+    <button onclick="selectSection('1.2', 'https://raw.githubusercontent.com/TerrifyingBridge/PlanetarySystemsProject/refs/heads/main/Chapter%201%20Two%20Body%20Problem/1.2%20The%20Shape%20of%20the%20Kepler%20Orbit/Description.md')">
+      Section 1.2 - The Shape of the Kepler Orbit
+    </button>
+    <button onclick="selectSection('1.3', 'https://raw.githubusercontent.com/TerrifyingBridge/PlanetarySystemsProject/refs/heads/main/Chapter%201%20Two%20Body%20Problem/1.2%20The%20Shape%20of%20the%20Kepler%20Orbit/Description.md')">
+      Section 1.3 - Motion in the Kepler Orbit
+    </button>
+    <button onclick="selectSection('1.4', 'https://raw.githubusercontent.com/TerrifyingBridge/PlanetarySystemsProject/refs/heads/main/Chapter%201%20Two%20Body%20Problem/1.2%20The%20Shape%20of%20the%20Kepler%20Orbit/Description.md')">
+      Section 1.4 - Canonical Orbital Elements
+    </button>
+    <button onclick="selectSection('1.5', 'https://raw.githubusercontent.com/TerrifyingBridge/PlanetarySystemsProject/refs/heads/main/Chapter%201%20Two%20Body%20Problem/1.2%20The%20Shape%20of%20the%20Kepler%20Orbit/Description.md')">
+      Section 1.5 - Units and Reference Frames
+    </button>
+    <button onclick="selectSection('1.6', 'https://raw.githubusercontent.com/TerrifyingBridge/PlanetarySystemsProject/refs/heads/main/Chapter%201%20Two%20Body%20Problem/1.2%20The%20Shape%20of%20the%20Kepler%20Orbit/Description.md')">
+      Section 1.6 - Orbital Elements for Exoplanets
+    </button>
+    <button onclick="selectSection('1.7', 'https://raw.githubusercontent.com/TerrifyingBridge/PlanetarySystemsProject/refs/heads/main/Chapter%201%20Two%20Body%20Problem/1.2%20The%20Shape%20of%20the%20Kepler%20Orbit/Description.md')">
+      Section 1.7 - Multipole Expansion of a Potential
+    </button>
+  </div>
+
+  <button class="chapter-button" onclick="toggleSectionList('chapter2')">Chapter 2 (Coming Soon)</button>
+  <div class="section-list" id="chapter2">
+    <button onclick="selectSection('2.1', 'https://raw.githubusercontent.com/username/repo/branch/path/to/section2.1.md')">
+      Section 2.1
+    </button>
+    <button onclick="selectSection('2.2', 'https://raw.githubusercontent.com/username/repo/branch/path/to/section2.2.md')">
+      Section 2.2
+    </button>
+  </div>
+</aside>
+
+<main>
+  <header>
+    <h1>Planetary Systems Project</h1>
+    <p>This project explores the dynamics of planetary systems using Python simulations and theoretical write-ups. Use the menu on the left to explore by chapter and section.</p>
+  </header>
+
+  <section id="visualization">
+    <h2 class="section-title">Visualization</h2>
+    <div class="visualization-box" id="visualization-content">
+      [Select a section to see a visualization]
+    </div>
+  </section>
+
+  <section id="markdown">
+    <h2 class="section-title">Write-Up</h2>
+    <div class="markdown-box" id="markdown-content">
+      [Select a section to load the markdown write-up]
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Christina Greenfield
+  </footer>
+</main>
+
+</body>
+</html>
