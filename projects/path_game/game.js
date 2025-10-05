@@ -137,8 +137,8 @@ let gameCanvas = {
             generatePoints();
         } else if (mX >= 270 && mX <= 325 && mY >= 540 && mY <= 600) {
             numPoints -= 1
-            if (numPoints < 0) {
-                numPoints = 0;
+            if (numPoints < 3) {
+                numPoints = 3;
             }
             this.drawUI();
             points = [];

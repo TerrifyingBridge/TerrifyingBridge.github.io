@@ -32,7 +32,7 @@
                 margin-top: 20px;
             }
             #description {
-                max-width: 600px;
+                max-width: 800px;
                 margin: 0 auto 20px auto;
                 padding: 15px 20px;
                 background-color: #FFFFFF;
@@ -42,7 +42,7 @@
                 border: 1px solid #ccc;
                 border-radius: 6px;
                 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-                text-align: left;
+                text-align: center;
             }
             #description p {
                 margin-bottom: 12px;
@@ -56,7 +56,25 @@
                 Welcome to a small game I've made about finding the optimal path!
             </p>
             <p>
-                other instructions coming soon!
+                I thought about this game while reading the first section of the first chapter of the book "The Algorithm Design Manual" by Steven S. Skiena.
+                The book is more entertaining than I'll describe it here (it's a fun read I promise), but the general premise is: giving a collection of points,
+                what is the most optimal path between then all? The book outlines a couple of algorithms that seem like they work, but always comes up with a
+                counterexample for why that particular algoirhtm doesn't work. This got me thinking: Wouldn't it be cool to make it so that people could test
+                their algoirhtms? And thus, I decided to make this game!
+            </p>
+            <h2>Instructions</h2>
+            <p>
+                The goal of the game is to find the optimal closed loop between the points. Clicking on one point will turn it green and if you click on another
+                point, this will draw a blue line that connects the two together. One point can only be connected to two other points at a given time, and the 
+                game ends when all points are connected together. When this happens, a red line will show up that connects all points together showing the optimal 
+                path between the points shown. If your path matches the red path, then you win!
+            </p>
+            <p>
+                Once a line is drawn, you cannot undo it directly. For this reason, I have created a "Reset Lines" button on the bottom right which erases all lines 
+                but keeps the points the same. Should you want to play a new game with the same number of points, but a different orientation, then the "Reset Points" 
+                button will randomly generate a new set of points (and erase the lines as well). To change the number of points to play with, the arrow on the 
+                left decreases the points by 1 while the arrow on the right increases the points by 1. There is a maximum of 10 points and a minimum of 3 (I'm not 
+                sure why you'd want to play 3 points, but you can).
             </p>
         </div>
         <canvas id="gameCanvas" width="600" height="400"></canvas>
