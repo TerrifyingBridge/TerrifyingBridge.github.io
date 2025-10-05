@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html land="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Optimal Path Game</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            body {
+                background-color: #f7f7f7;
+                color: #333;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-height: 100vh;
+                padding: 30px 20px;
+            }
+            h1 {
+                margin-bottom: 20px;
+                font-size: 2em;
+                color: #222;
+            }
+            canvas {
+                border:2px solid #444;
+                background-color: crimson;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+                margin-top: 20px;
+            }
+            #description {
+                max-width: 600px;
+                margin: 0 auto 20px auto;
+                padding: 15px 20px;
+                background-color: #FFFFFF;
+                color: #333;
+                font-size: 16px;
+                line-height: 1.6;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+                text-align: left;
+            }
+            #description p {
+                margin-bottom: 12px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Optimal Path Game</h1>
+        <div id="description">
+            <p>
+                Welcome to a small game I've made about finding the optimal path!
+            </p>
+            <p>
+                other instructions coming soon!
+            </p>
+        </div>
+        <canvas id="gameCanvas" width="600" height="400"></canvas>
+        <script src="game.js"></script>
+    </body>
+</html>
